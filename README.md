@@ -1,1 +1,2 @@
-# a-hard-stone.github.io
+# this is a blog of ahardstone
+# hello world
