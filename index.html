@@ -3,12 +3,35 @@
     <head>
         <meta charset="utf-8">
         <title>ahardstone</title>
-        <link rel="icon" href="image/inco.png">
+        <link rel="icon" href="image/inco.png"> 
+        <link rel="stylesheet" href="style.css">
     </head> 
     <body background="https://s1.ax1x.com/2022/12/19/zqrxIA.jpg">
-        <p>this is a paragragh</p>
+        <p class="font">this is a paragragh</p>
         <a href="test.html">
-            <button>残缺的计算器</button>
-        </a>        
+            <button class="button">残缺的计算器</button>
+        </a>
+        <br><br>
+        <button class="button" onclick=request()>contest</button>           
     </body>
 </html>
+<script>
+    function request() {
+        var oj = new XMLHttpRequest;
+        oj.onreadystatechange = function() {
+            if (this.readyState == 0) {
+                alert("尚未调用");
+            } else if (this.readyState == 1) {
+                alert("已调用");
+            } else if (this.readyState == 2) {
+                alert("接收头消息");
+            } else if (this.readyState == 3) {
+                alert("接受相应主体");
+            } else {
+                alert(JSON.stringify(this.responseText))
+            }
+        }
+        oj.open('GET', "https://codeforces.com/api/contest.list");
+        oj.send();
+    }
+</script>
