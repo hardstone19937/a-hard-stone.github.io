@@ -14,3 +14,7 @@
 ### change
 1.using css add some styles.<br>
 2.add a button and write a script for it to get date from a api of codeforces, but just print the json in string without other process.
+## version 0.0.0.3
+### change
+1.delete old things.
+2.get the API of codeforces.
