@@ -1,37 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
     <head>
         <meta charset="utf-8">
-        <title>ahardstone</title>
+        <title>最近比赛</title>
         <link rel="icon" href="image/inco.png"> 
-        <link rel="stylesheet" href="style.css">
+        <!-- rel=relationship, href= here is reference -->
+        <script>
+            function gets() {
+                var ob = new XMLHttpRequest();
+                ob.onreadystatechange = function() {
+                    if (ob.readyState == 4) {
+                        var now = Date.parse(new Date())
+                        eval("var info="+ob.responseText);
+                        // var d = new Date(info.result[0].startTimeSeconds * 1000);
+                        // var s=info.result[0].name+' '+ d;
+                        var s="";
+                        for (var i=0; ; i++) {
+                            if (info.result[i].startTimeSeconds*1000<now) break;
+                            var d=new Date(info.result[i].startTimeSeconds * 1000);
+                            s+=info.result[i].name+' '+d+'<br>';
+                        }
+                        var x=document.getElementById("c");
+                        x.innerHTML=s;
+                    }
+                }
+                ob.open('get', 'https://codeforces.com/api/contest.list');
+                ob.send(null);
+            }
+            </script>
     </head> 
-    <body background="https://s1.ax1x.com/2022/12/19/zqrxIA.jpg">
-        <p class="font">this is a paragragh</p>
-        <a href="test.html">
-            <button class="button">残缺的计算器</button>
-        </a>
-        <br><br>
-        <button class="button" onclick=request()>contest</button>           
+    <body>        
+        <input type="button" value="最近cf比赛", onclick="gets()">
+        <article id="c"></article>
     </body>
 </html>
-<script>
-    function request() {
-        var oj = new XMLHttpRequest;
-        oj.onreadystatechange = function() {
-            if (this.readyState == 0) {
-                alert("尚未调用");
-            } else if (this.readyState == 1) {
-                alert("已调用");
-            } else if (this.readyState == 2) {
-                alert("接收头消息");
-            } else if (this.readyState == 3) {
-                alert("接受相应主体");
-            } else {
-                alert(JSON.stringify(this.responseText))
-            }
-        }
-        oj.open('GET', "https://codeforces.com/api/contest.list");
-        oj.send();
-    }
-</script>
